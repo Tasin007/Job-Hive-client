@@ -1,4 +1,4 @@
-const Testimonials = () => {
+const Review = () => {
     return (
       <div className="overflow-hidden bg-slate-800">
         <div className="relative max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -143,5 +143,5 @@ const Testimonials = () => {
     );
   };
   
-  export default Testimonials;
+  export default Review;
   

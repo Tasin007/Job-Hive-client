@@ -1,14 +1,37 @@
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [userProfile, setUserProfile] = useState(null);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      toast.success("User Logout successfully");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    setUserProfile({
+      name: user?.displayName,
+      photo: user?.photoURL,
+    });
+  }, [user?.displayName, user?.photoURL]);
+
   return (
     <div>
       <header className="bg-white shadow-sm">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Global">
-          <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
+        <nav className="max-w-7xl mx-auto px-4 lg:px-8" aria-label="Global">
+          <div className="flex justify-between items-center py-6 md:justify-start space-x-20 lg:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <NavLink to="/" aria-label="Home">
                 <span className="sr-only">JobHive</span>
@@ -31,27 +54,62 @@ const Navbar = () => {
               </button>
             </div>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-              <NavLink to="/" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+
+              <NavLink to="/" className="whitespace-nowrap text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900">
                 Home
               </NavLink>
-              <NavLink to="/alljobs" className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              <NavLink to="/alljobs" className="ml-8 whitespace-nowrap text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900">
                 All Jobs
               </NavLink>
-              <NavLink to="/blogs" className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              <NavLink to="/blogs" className="ml-8 whitespace-nowrap text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900">
                 Blogs
               </NavLink>
-              <NavLink to="/addjob" className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              <NavLink to="/addjob" className="ml-8 whitespace-nowrap text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900">
                 Add A Job
               </NavLink>
-              <NavLink to="/myjobs" className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              <NavLink to="/myjobs" className="ml-8 whitespace-nowrap text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900">
                 My Jobs
               </NavLink>
-              <NavLink to="/appliedjob" className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              <NavLink to="/appliedjob" className="ml-8 whitespace-nowrap text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900">
                 Applied Jobs
               </NavLink>
-              <NavLink to="/login" className="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                Login
-              </NavLink>
+              {
+                  user?.email ? (
+                    <div>
+                      <h1 
+                      className="block px-3 py-2 rounded-md text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 cursor-pointer"
+                      onClick={handleLogOut}>
+                        LogOut
+                      </h1>
+                    </div>
+                  ) : (
+                    <NavLink to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                  Login
+                </NavLink>
+                  )
+                }
+                <div className="">
+                {user?.email && (
+                <h1 className="text-lg p-1 rounded-md ">
+                  {" "}
+                  {userProfile?.name}{" "}
+                </h1>
+              )}
+
+              {user?.email && (
+                <>
+                  <div className="relative inline-block">
+                    <img
+                      className="inline-block h-[2.875rem] w-[2.875rem] rounded-full ring-2 ring-white dark:ring-gray-800"
+                      src={userProfile?.photo}
+                      alt="Image Description"
+                    />
+                    <span className="absolute top-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white bg-green-400"></span>
+                  </div>
+                </>
+              )}
+                </div>
+                
             </div>
           </div>
 
@@ -78,27 +136,58 @@ const Navbar = () => {
               </div>
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {/* Mobile menu items */}
+                {user?.email && (
+                <h1 className="text-lg p-1 rounded-md">
+                  {" "}
+                  {userProfile?.name}{" "}
+                </h1>
+              )}
+
+              {user?.email && (
+                <>
+                  <div className="relative inline-block">
+                    <img
+                      className="inline-block h-[2.875rem] w-[2.875rem] rounded-full ring-2 ring-white dark:ring-gray-800"
+                      src={userProfile?.photo}
+                      alt="Image Description"
+                    />
+                    <span className="absolute top-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white bg-green-400"></span>
+                  </div>
+                </>
+              )}
                 <NavLink to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   Home
                 </NavLink>
-                <NavLink to="/all-jobs" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                <NavLink to="/alljobs" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   All Jobs
                 </NavLink>
                 <NavLink to="/blogs" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   Blogs
                 </NavLink>
-                <NavLink to="/add-job" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                <NavLink to="/addjob" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   Add A Job
                 </NavLink>
-                <NavLink to="/my-jobs" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                <NavLink to="/myjobs" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   My Jobs
                 </NavLink>
-                <NavLink to="/applied-jobs" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                <NavLink to="/appliedjob" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   Applied Jobs
                 </NavLink>
-                <NavLink to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                {
+                  user?.email ? (
+                    <div>
+                      <h1 
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                      onClick={handleLogOut}>
+                        Log Out
+                      </h1>
+                    </div>
+                  ) : (
+                    <NavLink to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                   Login
                 </NavLink>
+                  )
+                }
               </div>
             </div>
           </div>

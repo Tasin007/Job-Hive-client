@@ -4,14 +4,14 @@ import Footer from "../components/Shared/Footer";
 import Discover from "../components/Shared/Discover";
 import Feature from "../components/Shared/Feature";
 import Review from "../components/Shared/Review";
-import Tab from "../components/Shared/Tab";
+import JobTabs from "../components/Shared/JobTabs";
 
 const Home = () => {
   return (
     <div>
       <Navbar></Navbar>
       <Banner></Banner>
-      <Tab></Tab>
+      <JobTabs></JobTabs>
       <Feature></Feature>
       <Discover></Discover>
       <Review></Review>

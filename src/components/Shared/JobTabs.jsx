@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const JobTabs = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [jobs, setJobs] = useState([]);
-  const [isLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with your authentication logic
 
   const tabs = [
     { name: 'all', label: 'All Jobs' },
@@ -22,12 +23,16 @@ const JobTabs = () => {
   const handleViewDetails = () => {
     if (!isLoggedIn) {
       // Notify the user and redirect to the login page
-      alert('You have to log in first to view details');
-      // Redirect to the login page, replace '/login' with your login route
-      window.location.href = '/login';
+      Swal.fire({
+        icon: 'error',
+        title: 'You have to log in first to view details',
+      }).then(() => {
+        // Redirect to the login page, replace '/login' with your login route
+        window.location.href = '/login';
+      });
     } else {
       // Logic to handle viewing details for logged-in users
-      // Add your own logic for viewing job details here
+      // Add yo own logic for viewing job details here
     }
   };
 

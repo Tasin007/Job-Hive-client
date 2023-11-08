@@ -44,32 +44,7 @@ const AllJobs = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Job Title</th>
-            <th>Job Posting Date</th>
-            <th>Application Deadline</th>
-            <th>Salary Range</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredJobs.map((job, index) => (
-            <tr key={index}>
-              <td>{job.postedBy}</td>
-              <td>{job.title}</td>
-              <td>{job.postingDate}</td>
-              <td>{job.applicationDeadline}</td>
-              <td>{job.salary}</td>
-              <td>
-                <button onClick={() => handleViewDetails(job)}>View Details</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+     
     </div>
   );
 };

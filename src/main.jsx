@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./Routes/Routes";
 import AuthProvider from "./context/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import('preline')
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

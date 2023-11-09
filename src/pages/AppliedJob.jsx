@@ -5,16 +5,16 @@ import { AuthContext } from "../context/AuthProvider";
 
 
 const AppliedJob = () => {
-    const data = useLoaderData();
+    const dataLoad = useLoaderData();
     const [jobs, setJobs] = useState([]);
 
     const {user} = useContext(AuthContext );
     const userEmail = user?.email;
 
     useEffect(()=> {
-        const filter = data.filter(job => job.email === userEmail);
+        const filter = dataLoad.filter(job => job.email === userEmail);
         setJobs(filter);
-    },[data, userEmail])
+    },[dataLoad, userEmail])
     console.log(jobs);
 
 

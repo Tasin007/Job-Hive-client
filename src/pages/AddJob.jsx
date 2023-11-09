@@ -46,7 +46,7 @@ const AddJob = () => {
             providerMail: providerMail,
        }
 
-       fetch('http://localhost:3000/api/v1/jobs', {
+       fetch('job-hive-server-side.vercel.app/api/v1/jobs', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

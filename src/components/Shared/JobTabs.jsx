@@ -24,7 +24,7 @@ const JobTabs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/jobs'); // Replace with your actual API endpoint
+        const response = await axios.get('job-hive-server-side.vercel.app/api/v1/jobs'); // Replace with your actual API endpoint
         setJobs(response.data);
       } catch (error) {
         console.error('Error fetching jobs:', error);

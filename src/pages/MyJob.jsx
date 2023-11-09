@@ -9,7 +9,7 @@ const MyJob = () => {
   const [jobs, setJobs] = useState([]);
   
   useEffect(() => {
-        fetch('http://localhost:3000/api/v1/jobs')
+        fetch('job-hive-server-side.vercel.app/api/v1/jobs')
         .then(res => res.json())
         .then(data => {
             // console.log(data);
@@ -32,7 +32,7 @@ const MyJob = () => {
     })
     .then((result) =>{
         if (result.isConfirmed) {
-            fetch(`http://localhost:3000/api/v1/jobs/${title}`, {
+            fetch(`job-hive-server-side.vercel.app/api/v1/jobs/${title}`, {
         method: "DELETE",
     })
         .then((res) => res.json())

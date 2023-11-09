@@ -1,4 +1,6 @@
-live link:
+Assignment: assignment_category_0003
+
+live link: job-hive-client-side.vercel.app
 
 Features for the Job Seeking Website:
 1.Dynamic Website Name: Just like before, the website name should be dynamic to reflect the nature of the job-seeking website.

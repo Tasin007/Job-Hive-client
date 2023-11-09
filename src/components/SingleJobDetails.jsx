@@ -30,7 +30,7 @@ const SingleJobDetails = () => {
             jobId: _id,
         };
         console.log(application);
-        fetch("job-hive-server-side.vercel.app/api/v1/applications", {
+        fetch("https://job-hive-server-side.vercel.app/api/v1/applications", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

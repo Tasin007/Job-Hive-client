@@ -55,7 +55,7 @@ const [startDate, setStartDate] = useState(new Date());
         applicationDeadline,
     }
 
-    fetch(`job-hive-server-side.vercel.app/api/v1/jobs/${jobId}`, {
+    fetch(`https://job-hive-server-side.vercel.app/api/v1/jobs/${jobId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

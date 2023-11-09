@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: '/jobs/:jobId',
         element: <PrivateRoute><SingleJobDetails /></PrivateRoute>,
-        loader: ({params}) => fetch(`job-hive-server-side.vercel.app/api/v1/jobs/${params.jobId}`)
+        loader: ({params}) => fetch(`https://job-hive-server-side.vercel.app/api/v1/jobs/${params.jobId}`)
       },
       {
         path: "/addjob",
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: "/appliedjob",
         element: <PrivateRoute><AppliedJob></AppliedJob></PrivateRoute>,
-        loader: ()=> fetch('job-hive-server-side.vercel.app/api/v1/applications')
+        loader: ()=> fetch('https://job-hive-server-side.vercel.app/api/v1/applications')
       },
       {
         path: "/blogs",
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       {
         path: '/update-jobs/:jobId',
         element: <PrivateRoute> <Update /> </PrivateRoute>,
-        loader: ({params}) => fetch(`job-hive-server-side.vercel.app/api/v1/update-jobs/${params.jobId}`)
+        loader: ({params}) => fetch(`https://job-hive-server-side.vercel.app/api/v1/update-jobs/${params.jobId}`)
       },
       {
         path: "*",
